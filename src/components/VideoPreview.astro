@@ -1,0 +1,9 @@
+---
+import { home } from '../data/content';
+import { stockMedia } from '../data/media';
+import { pathFor } from '../utils/paths';
+---
+<div class="video-poster" data-image-reveal>
+  <img src={pathFor(stockMedia.equipment.src)} width={stockMedia.equipment.width} height={stockMedia.equipment.height} alt="" loading="lazy" />
+  <div class="video-poster-content"><span class="eyebrow">{home.videos.label}</span><p>{home.videos.posterTitle}<br /><em>{home.videos.posterEmphasis}</em></p><span class="play-placeholder" aria-hidden="true"><svg width="22" height="24" viewBox="0 0 22 24" fill="none"><path d="m5 3 14 9-14 9V3Z" stroke="currentColor" stroke-width="1.3" /></svg></span><span class="poster-note">{home.videos.posterNote}</span></div>
+</div>

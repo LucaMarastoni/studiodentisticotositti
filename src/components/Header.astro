@@ -1,0 +1,41 @@
+---
+import { clinic, navigation } from '../data/clinic';
+import { pathFor } from '../utils/paths';
+import Arrow from './Arrow.astro';
+const pathname = Astro.url.pathname.replace(/\/$/, '');
+---
+<header class="site-header" data-header>
+  <div class="header-inner shell" data-header-inner>
+    <a class="wordmark" href={pathFor()} aria-label={`${clinic.name} — Home`}>
+      <span class="wordmark-top">Studio Dentistico</span><span class="wordmark-name">Tositti<span class="wordmark-dot">.</span></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-navigation" data-menu-toggle><span class="sr-only">Apri il menu</span><span class="menu-lines" aria-hidden="true"><i></i><i></i></span></button>
+    <nav id="main-navigation" class="navigation navigation--desktop" aria-label="Navigazione principale">
+      {navigation.map(item => <a href={pathFor(item.path)} aria-current={pathname === pathFor(item.path).replace(/\/$/, '') ? 'page' : undefined}>{item.label}</a>)}
+      <a class="header-cta" href={clinic.phoneHref}><span>Prenota una visita</span><Arrow /></a>
+    </nav>
+  </div>
+  <div id="mobile-navigation" class="mobile-menu" data-mobile-menu aria-hidden="true" inert>
+    <div class="mobile-menu__inner">
+      <div class="mobile-menu__header">
+        <a class="wordmark mobile-menu__wordmark" href={pathFor()} aria-label={`${clinic.name} — Home`}>
+          <span class="wordmark-top">Studio Dentistico</span><span class="wordmark-name">Tositti<span class="wordmark-dot">.</span></span>
+        </a>
+        <button class="mobile-menu__close" type="button" data-menu-close><span class="sr-only">Chiudi il menu</span><span aria-hidden="true"></span></button>
+      </div>
+      <nav class="mobile-menu__nav" aria-label="Navigazione mobile">
+        {navigation.map((item, index) => (
+          <a href={pathFor(item.path)} aria-current={pathname === pathFor(item.path).replace(/\/$/, '') ? 'page' : undefined} style={`--menu-delay: ${200 + index * 60}ms`}>
+            <span class="mobile-menu__number">{String(index + 1).padStart(2, '0')}</span>
+            <span class="mobile-menu__label">{item.label === 'Team' ? 'Il team' : item.label}</span>
+          </a>
+        ))}
+      </nav>
+      <div class="mobile-menu__footer">
+        <a class="mobile-menu__cta" href={clinic.phoneHref}><span>Prenota una visita</span><span aria-hidden="true">↗</span></a>
+        <p>Villaverla <span aria-hidden="true">·</span> Vicenza</p>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="header-sentinel" data-header-sentinel aria-hidden="true"></div>

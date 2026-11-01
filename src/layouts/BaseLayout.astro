@@ -1,0 +1,38 @@
+---
+import '@fontsource-variable/dm-sans';
+import '@fontsource/cormorant-garamond/latin-500.css';
+import '@fontsource/cormorant-garamond/latin-500-italic.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageLoader from '../components/PageLoader.astro';
+import { clinic } from '../data/clinic';
+import { pathFor } from '../utils/paths';
+interface Props { title?: string; description?: string; noindex?: boolean }
+const { title = 'Il sorriso inizia dalla fiducia', description = 'Studio Dentistico Tositti — Dott.ssa Raffaella a Villaverla (VI). Via Stadio, 2. Informazioni e appuntamenti al numero 0445 350135.', noindex = false } = Astro.props;
+const publicSite = Astro.site && !['localhost', '127.0.0.1', '[::1]'].includes(Astro.site.hostname) ? Astro.site : undefined;
+const canonical = publicSite ? new URL(Astro.url.pathname, publicSite).href : undefined;
+const preview = import.meta.env.PUBLIC_DEPLOY_ENV !== 'production';
+const pageTitle = `${title} | ${clinic.name}`;
+const schema = { '@context': 'https://schema.org', '@type': 'Dentist', name: clinic.name, telephone: '+390445350135', address: { '@type': 'PostalAddress', streetAddress: clinic.street, addressLocality: 'Villaverla', addressRegion: 'VI', postalCode: '36030', addressCountry: 'IT' }, ...(publicSite ? { url: new URL(pathFor(), publicSite).href } : {}) };
+---
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#294b3d" /><meta name="description" content={description} />
+    <script is:inline>document.documentElement.dataset.loaderReady = 'true';</script>
+    {(preview || noindex) && <meta name="robots" content="noindex,nofollow" />}
+    <title>{pageTitle}</title>
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" /><meta property="og:locale" content="it_IT" /><meta property="og:site_name" content={clinic.name} /><meta property="og:title" content={pageTitle} /><meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <link rel="icon" type="image/svg+xml" href={pathFor('favicon.svg')} />
+    <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
+  </head>
+  <body>
+    <PageLoader /><a href="#main-content" class="skip-link">Vai al contenuto</a><Header />
+    <main id="main-content"><slot /></main><Footer />
+    <script>import '../scripts/page-loader'; import '../scripts/navigation'; import '../scripts/motion';</script>
+  </body>
+</html>

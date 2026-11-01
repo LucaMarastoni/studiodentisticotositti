@@ -1,0 +1,26 @@
+@theme {
+  --color-forest: #294b3d;
+  --color-sage: #829786;
+  --color-ivory: #f7f6f0;
+  --color-mist: #e8ede5;
+  --color-ink: #202723;
+  --font-sans: 'DM Sans Variable', 'DM Sans', sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+}
+:root {
+  --forest: #294b3d;
+  --sage: #829786;
+  --ivory: #f7f6f0;
+  --mist: #e8ede5;
+  --ink: #202723;
+  --muted: #59685e;
+  --line: #294b3d30;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans Variable', 'DM Sans', sans-serif;
+  --font-display-weight: 500;
+  --font-body-regular: 400;
+  --font-body-medium: 500;
+  --font-body-semibold: 600;
+  --serif: var(--font-display);
+  --sans: var(--font-body);
+}

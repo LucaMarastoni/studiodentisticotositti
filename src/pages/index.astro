@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Action from '../components/Action.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import TreatmentPreview from '../components/TreatmentPreview.astro';
+import VideoPreview from '../components/VideoPreview.astro';
+import TestimonialShowcase from '../components/TestimonialShowcase.astro';
+import { home } from '../data/content';
+import { clinic } from '../data/clinic';
+import { stockMedia } from '../data/media';
+import { pathFor } from '../utils/paths';
+---
+<BaseLayout>
+  <section class="hero hero--video" aria-labelledby="hero-title" data-hero>
+    <figure class="hero-visual hero-visual--background"><div class="hero-image-wrap hero-video-wrap"><video autoplay muted loop playsinline preload="metadata" poster={pathFor('media/posters/hero-trust.webp')} aria-hidden="true" tabindex="-1" data-hero-video data-hero-image><source src={pathFor('media/video/hero-trust.mp4')} type="video/mp4" /></video><span class="hero-video-shade" aria-hidden="true"></span><span class="hero-art-label" aria-hidden="true">{home.hero.artLabel}</span></div><figcaption>{home.hero.artCaption}</figcaption></figure>
+    <div class="hero-copy shell" data-hero-copy><p class="eyebrow hero-eyebrow"><span class="small-line" aria-hidden="true"></span>{home.hero.eyebrow}</p><h1 id="hero-title">{home.hero.title}<br /><em>{home.hero.emphasis}</em></h1><p class="hero-description">{home.hero.description}</p><div class="hero-actions"><Action href={clinic.phoneHref}>{home.hero.appointment}</Action><Action href={pathFor('trattamenti/')} variant="text">{home.hero.secondary}</Action></div><p class="hero-note">{home.hero.note}</p><a class="scroll-cue" href="#lo-studio"><span aria-hidden="true">↓</span> Un incontro, da qui</a></div>
+  </section>
+  <div class="location-strip"><div class="shell"><span>Vicino a te, a <strong>Villaverla.</strong></span><a href={clinic.mapsUrl}>{clinic.street} · {clinic.locality}<span aria-hidden="true">↗</span></a><a href={clinic.phoneHref}>{clinic.phoneDisplay}<span aria-hidden="true">↗</span></a></div></div>
+  <section class="studio-section shell section-space" id="lo-studio" aria-labelledby="studio-title">
+    <figure class="studio-art" data-image-reveal><img src={pathFor(stockMedia.clinicNeutral.src)} width={stockMedia.clinicNeutral.width} height={stockMedia.clinicNeutral.height} alt={stockMedia.clinicNeutral.alt} loading="lazy" /><figcaption>{stockMedia.clinicNeutral.caption}</figcaption></figure>
+    <div class="studio-copy"><p class="eyebrow" data-reveal>{home.studio.eyebrow}</p><h2 id="studio-title" data-title>{home.studio.title}<br /><em>{home.studio.emphasis}</em></h2><p class="body-large" data-reveal>{home.studio.text}</p><p class="muted-note" data-reveal>{home.studio.aside}</p><div data-reveal><Action href={pathFor('studio/')} variant="outline">{home.studio.cta}</Action></div></div>
+  </section>
+  <section class="treatments-section section-space" aria-labelledby="treatments-title"><div class="shell"><div class="section-heading"><div><p class="eyebrow" data-reveal>{home.treatments.eyebrow}</p><h2 id="treatments-title" data-title>{home.treatments.title}<br /><em>{home.treatments.emphasis}</em></h2></div><div class="section-heading-side" data-reveal><p>{home.treatments.description}</p><Action href={pathFor('trattamenti/')} variant="text">{home.treatments.cta}</Action></div></div><TreatmentPreview /></div></section>
+  <section class="testimonials-section section-space" aria-labelledby="testimonials-title"><div class="shell"><div class="testimonials-heading"><div><p class="eyebrow" data-reveal>{home.testimonials.eyebrow}</p><h2 id="testimonials-title" data-title>{home.testimonials.title}<br /><em>{home.testimonials.emphasis}</em></h2></div><div class="testimonials-intro" data-reveal><p>{home.testimonials.description}</p><span>{home.testimonials.status}</span><Action href={pathFor('video/')} variant="light">{home.testimonials.cta}</Action></div></div><TestimonialShowcase /></div></section>
+  <section class="videos-section shell section-space" aria-labelledby="videos-title"><div class="videos-copy"><p class="eyebrow" data-reveal>{home.videos.eyebrow}</p><h2 id="videos-title" data-title>{home.videos.title}<br /><em>{home.videos.emphasis}</em></h2><p data-reveal>{home.videos.text}</p><div data-reveal><Action href={pathFor('video/')} variant="outline">{home.videos.cta}</Action></div></div><VideoPreview /></section>
+  <ContactBlock />
+</BaseLayout>

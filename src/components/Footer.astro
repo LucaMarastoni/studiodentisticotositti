@@ -1,0 +1,13 @@
+---
+import { clinic, navigation } from '../data/clinic';
+import { footer } from '../data/content';
+import { pathFor } from '../utils/paths';
+---
+<footer class="site-footer">
+  <div class="shell footer-main">
+    <div><a class="wordmark" href={pathFor()}><span class="wordmark-top">Studio Dentistico</span><span class="wordmark-name">Tositti.</span></a><p class="footer-tagline">{footer.tagline}</p><p class="small">{clinic.practitioner}</p></div>
+    <nav aria-label="Navigazione nel footer" class="footer-nav">{navigation.map(item => <a href={pathFor(item.path)}>{item.label}</a>)}</nav>
+    <address><span>{clinic.street}</span><span>{clinic.locality}</span><a href={clinic.phoneHref}>{clinic.phoneDisplay}</a></address>
+  </div>
+  <div class="shell footer-bottom"><p>{footer.note}</p><div><a href={pathFor('privacy/')}>Privacy <span class="sr-only">— in preparazione</span></a><a href={pathFor('cookie/')}>Cookie <span class="sr-only">— in preparazione</span></a></div><p>{footer.legalNote}</p></div>
+</footer>

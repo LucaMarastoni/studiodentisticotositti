@@ -1,0 +1,6 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Action from '../components/Action.astro';
+import { pathFor } from '../utils/paths';
+---
+<BaseLayout title="Pagina non trovata" noindex><section class="shell not-found"><p class="eyebrow">404 / Pagina non trovata</p><h1>Ripartiamo<br /><em>da un sorriso.</em></h1><p>Questa pagina non è disponibile. Torna alla homepage per continuare.</p><Action href={pathFor()}>Torna alla home</Action></section></BaseLayout>

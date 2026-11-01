@@ -1,0 +1,21 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import { pages } from '../data/content';
+import { pathFor } from '../utils/paths';
+interface Props { page: keyof typeof pages }
+const { page } = Astro.props;
+const content = pages[page];
+const legal = page === 'privacy' || page === 'cookie';
+---
+<BaseLayout title={`${content.eyebrow} — Villaverla`} description={content.description} noindex={legal}>
+  <section class="interior-hero shell">
+    <a class="breadcrumb" href={pathFor()}>Home <span aria-hidden="true">/</span></a>
+    <p class="eyebrow" data-reveal>{content.eyebrow}</p><h1 data-title>{content.title}<br /><em>{content.emphasis}</em></h1><p class="interior-description" data-reveal>{content.description}</p>
+  </section>
+  <section class:list={['shell interior-content', { 'interior-content--text': !content.image }]}>
+    {content.image && <figure class="interior-image" data-image-reveal><img src={pathFor(content.image.src)} alt={content.image.alt} width={content.image.width} height={content.image.height} fetchpriority="high" /><figcaption>{content.image.caption}</figcaption></figure>}
+    <div class="interior-note" data-reveal><span class="eyebrow">{legal ? 'Anteprima di sviluppo' : 'Il nuovo sito prende forma'}</span><h2>{content.noteTitle}</h2><p>{content.note}</p><slot /></div>
+  </section>
+  {!legal && <ContactBlock />}
+</BaseLayout>

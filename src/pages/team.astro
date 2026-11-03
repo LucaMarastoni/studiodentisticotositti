@@ -1,4 +1,16 @@
 ---
-import InteriorLayout from '../layouts/InteriorLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import { pages } from '../data/content';
+import { team, assistants } from '../data/team';
+import { pathFor } from '../utils/paths';
+const content = pages.team;
 ---
-<InteriorLayout page="team" />
+<BaseLayout title="Équipe — Villaverla" description={content.description}>
+  <section class="interior-hero shell"><a class="breadcrumb" href={pathFor()}>Home <span aria-hidden="true">/</span></a><p class="eyebrow" data-reveal>{content.eyebrow}</p><h1 data-title>{content.title}<br /><em>{content.emphasis}</em></h1><p class="interior-description" data-reveal>{content.description}</p></section>
+  <section class="team-section section-space--bottom"><div class="shell"><div class="team-grid">
+    {team.map((member, index) => <article class:list={['team-card', { 'team-card--lead': index === 0 }]} data-reveal><div class="team-card__copy"><span class="card-number">{String(index + 1).padStart(2, '0')}</span><p class="team-role">{member.role}</p><h2>{member.name}</h2><p>{member.credentials}</p><p>{member.focus}</p></div>{member.image && <figure class="team-card__portrait"><img src={pathFor(member.image.src)} width={member.image.width} height={member.image.height} alt={member.image.alt} loading="eager" /></figure>}</article>)}
+  </div></div></section>
+  <section class="assistants-section section-space"><div class="shell editorial-split editorial-split--compact"><div><p class="eyebrow">Assistenza clinica</p><h2>Presenza e cura,<br /><em>ogni giorno.</em></h2></div><div><p class="section-lead">Le assistenti hanno completato la formazione ASO e partecipano a percorsi di aggiornamento professionale.</p><div class="assistant-list">{assistants.map(person => <div><strong>{person.name}</strong><span>{person.role}</span></div>)}</div></div></div></section>
+  <ContactBlock />
+</BaseLayout>

@@ -1,5 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ContactBlock from '../components/ContactBlock.astro';
+import Action from '../components/Action.astro';
+import { clinic, openingHours } from '../data/clinic';
+import { pathFor } from '../utils/paths';
 ---
-<BaseLayout title="Contatti — Villaverla" description="Contatta lo Studio Dentistico Tositti: 0445 350135. Via Stadio, 2, 36030 Villaverla (VI). Indicazioni e appuntamenti telefonici."><ContactBlock standalone /></BaseLayout>
+<BaseLayout title="Contatti e orari — Villaverla" description="Contatta lo Studio Dentistico Tositti: 0445 350135. Via Stadio, 2, 36030 Villaverla (VI). Orari e appuntamenti telefonici.">
+  <section class="interior-hero shell"><a class="breadcrumb" href={pathFor()}>Home <span aria-hidden="true">/</span></a><p class="eyebrow" data-reveal>Contatti</p><h1 data-title>Un appuntamento,<br /><em>con semplicità.</em></h1><p class="interior-description" data-reveal>Lo studio riceve esclusivamente su appuntamento, da concordare telefonicamente.</p></section>
+  <section class="contact-details section-space--bottom"><div class="shell contact-details-grid">
+    <div class="contact-primary" data-reveal><p class="eyebrow">Telefono</p><a href={clinic.phoneHref}>{clinic.phoneDisplay}<span aria-hidden="true">↗</span></a><p>Per informazioni, prenotazioni, variazioni o disdette.</p></div>
+    <div class="contact-address" data-reveal><p class="eyebrow">Dove siamo</p><address>{clinic.street}<br />{clinic.locality}</address><Action href={clinic.mapsUrl} variant="outline">Apri le indicazioni</Action></div>
+  </div></section>
+  <section class="hours-section section-space"><div class="shell editorial-split editorial-split--compact"><div><p class="eyebrow">Orari</p><h2>Quando<br /><em>trovarci.</em></h2><p class="hours-note">Martedì e venerdì lo studio osserva orario continuato.</p></div><dl class="hours-list">{openingHours.map(item => <div><dt>{item.day}</dt><dd>{item.hours}</dd></div>)}</dl></div></section>
+  <section class="appointments-section section-space"><div class="shell"><div class="section-heading"><div><p class="eyebrow">Informazioni utili</p><h2>Organizzare<br /><em>la visita.</em></h2></div><p class="section-lead">Una gestione puntuale degli appuntamenti aiuta lo studio a riservare spazio anche alle necessità urgenti.</p></div><div class="values-grid"><article><span>01</span><h3>Disdette</h3><p>In caso di impossibilità, è richiesto di avvisare con almeno 24 ore di anticipo.</p></article><article><span>02</span><h3>Preventivi</h3><p>Dopo la valutazione viene fornito un preventivo scritto con le cure proposte e i costi previsti.</p></article><article><span>03</span><h3>Pagamenti</h3><p>Sono accettati contanti, assegni, Bancomat e carte. Eventuali finanziamenti e pratiche assicurative vanno concordati con la segreteria.</p></article><article><span>04</span><h3>Prima delle cure</h3><p>Vengono raccolte e aggiornate l’anamnesi e le informazioni necessarie alla cura. La propria documentazione clinica e amministrativa può essere richiesta allo studio.</p></article></div></div></section>
+</BaseLayout>

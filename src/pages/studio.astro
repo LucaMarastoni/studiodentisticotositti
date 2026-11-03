@@ -1,4 +1,23 @@
 ---
-import InteriorLayout from '../layouts/InteriorLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import { pages } from '../data/content';
+import { stockMedia } from '../data/media';
+import { pathFor } from '../utils/paths';
+const content = pages.studio;
 ---
-<InteriorLayout page="studio" />
+<BaseLayout title="Lo studio dal 1991 — Villaverla" description={content.description}>
+  <section class="interior-hero shell"><a class="breadcrumb" href={pathFor()}>Home <span aria-hidden="true">/</span></a><p class="eyebrow" data-reveal>{content.eyebrow}</p><h1 data-title>{content.title}<br /><em>{content.emphasis}</em></h1><p class="interior-description" data-reveal>{content.description}</p></section>
+  <section class="shell editorial-split section-space--bottom">
+    <figure class="interior-image" data-image-reveal><img src={pathFor(stockMedia.clinicNeutral.src)} alt={stockMedia.clinicNeutral.alt} width={stockMedia.clinicNeutral.width} height={stockMedia.clinicNeutral.height} fetchpriority="high" /><figcaption>{stockMedia.clinicNeutral.caption}</figcaption></figure>
+    <div class="editorial-copy" data-reveal><p class="eyebrow">La nostra storia</p><h2>Dall’incontro nasce la fiducia.</h2><p>Lo Studio Tositti nasce nel 1991 a Villaverla come ambulatorio monoprofessionale. Nel tempo è cresciuto fino a diventare uno studio dentistico polispecialistico, grazie alla collaborazione tra professionisti con competenze complementari.</p><p>L’obiettivo è seguire bambini, adolescenti e adulti dalla prevenzione alle terapie specialistiche, mantenendo continuità nel percorso e chiarezza nel confronto.</p></div>
+  </section>
+  <section class="values-section section-space"><div class="shell"><div class="section-heading"><div><p class="eyebrow">Il nostro approccio</p><h2>Prima la persona,<br /><em>poi il percorso.</em></h2></div><p class="section-lead">Ascolto, aggiornamento professionale e attenzione alla prevenzione guidano il lavoro quotidiano.</p></div><div class="values-grid">
+    <article><span>01</span><h3>Ascolto</h3><p>Il piano di cura considera le condizioni cliniche, le esigenze e i tempi della singola persona.</p></article>
+    <article><span>02</span><h3>Accoglienza</h3><p>Particolare attenzione è dedicata ai bambini e a chi affronta le cure con ansia o stress.</p></article>
+    <article><span>03</span><h3>Prevenzione</h3><p>Controlli e monitoraggio nel tempo aiutano a mantenere la salute orale e i risultati ottenuti.</p></article>
+    <article><span>04</span><h3>Continuità</h3><p>L’équipe accompagna il paziente nelle diverse fasi, dalla diagnosi ai controlli successivi.</p></article>
+  </div></div></section>
+  <section class="shell facility-section section-space"><div><p class="eyebrow">Spazi e organizzazione</p><h2>Funzionalità,<br /><em>comfort, sicurezza.</em></h2></div><div class="facility-copy"><p>Lo studio dispone di tre unità operative, una sala d’attesa, una segreteria e una sala dedicata alla sterilizzazione.</p><p>Radiologia digitale, laser e tecnologie di supporto alla diagnosi e alla pianificazione vengono utilizzati quando indicato. Le procedure di sicurezza, radioprotezione, sterilizzazione e gestione dei dati sono parte dell’organizzazione dello studio.</p><p class="disclaimer">Le fotografie presenti in questa anteprima sono immagini di repertorio e saranno sostituite con materiali ufficiali approvati.</p></div></section>
+  <ContactBlock />
+</BaseLayout>

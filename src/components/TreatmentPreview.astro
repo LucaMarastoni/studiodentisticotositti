@@ -1,8 +1,8 @@
 ---
 import { treatments, treatmentPlaceholders } from '../data/treatments';
 import { pathFor } from '../utils/paths';
-const approved = treatments.filter(treatment => treatment.status === 'approved');
+const approved = treatments.filter(treatment => treatment.status === 'approved').slice(0, 3);
 ---
 <div class="treatment-grid">
-  {approved.length ? approved.map((item, index) => <article class="treatment-card" data-reveal><div class="treatment-art"><img src={pathFor(item.image)} width="640" height="480" alt="" loading="lazy" /></div><div class="treatment-body"><span class="card-number">{String(index + 1).padStart(2, '0')}</span><h3>{item.title}</h3><p>{item.summary}</p></div></article>) : treatmentPlaceholders.map(item => <article class="treatment-card" data-reveal><div class="treatment-art" aria-hidden="true"><img src={pathFor(item.image.src)} width={item.image.width} height={item.image.height} alt="" loading="lazy" /></div><div class="treatment-body"><div class="card-topline"><span class="card-number">{item.number}</span><span class="status-label">In preparazione</span></div><h3>{item.title}</h3><p>{item.description}</p></div></article>)}
+  {approved.length ? approved.map((item, index) => <article class="treatment-card" data-reveal><div class="treatment-art"><img src={pathFor(item.image ?? 'media/stock/clinic-bright.webp')} width="640" height="480" alt="" loading="lazy" /></div><div class="treatment-body"><span class="card-number">{String(index + 1).padStart(2, '0')}</span><h3>{item.title}</h3><p>{item.summary}</p></div></article>) : treatmentPlaceholders.map(item => <article class="treatment-card" data-reveal><div class="treatment-art" aria-hidden="true"><img src={pathFor(item.image.src)} width={item.image.width} height={item.image.height} alt="" loading="lazy" /></div><div class="treatment-body"><div class="card-topline"><span class="card-number">{item.number}</span><span class="status-label">In preparazione</span></div><h3>{item.title}</h3><p>{item.description}</p></div></article>)}
 </div>

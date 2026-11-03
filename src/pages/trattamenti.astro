@@ -1,4 +1,17 @@
 ---
-import InteriorLayout from '../layouts/InteriorLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import { pages } from '../data/content';
+import { treatments } from '../data/treatments';
+import { pathFor } from '../utils/paths';
+const content = pages.trattamenti;
+const categories = ['Prevenzione e cura', 'Chirurgia e riabilitazione', 'Funzione ed estetica', 'Tecnologie e supporto'] as const;
 ---
-<InteriorLayout page="trattamenti" />
+<BaseLayout title="Trattamenti odontoiatrici — Villaverla" description={content.description}>
+  <section class="interior-hero shell"><a class="breadcrumb" href={pathFor()}>Home <span aria-hidden="true">/</span></a><p class="eyebrow" data-reveal>{content.eyebrow}</p><h1 data-title>{content.title}<br /><em>{content.emphasis}</em></h1><p class="interior-description" data-reveal>{content.description}</p></section>
+  <div class="treatment-index section-space--bottom">
+    {categories.map((category, categoryIndex) => <section class="treatment-category"><div class="shell"><header><span>{String(categoryIndex + 1).padStart(2, '0')}</span><h2>{category}</h2></header><div class="treatment-list">{treatments.filter(item => item.category === category && item.status === 'approved').map(item => <article id={item.slug} data-reveal><h3>{item.title}</h3><p class="treatment-summary">{item.summary}</p><p>{item.description}</p></article>)}</div></div></section>)}
+  </div>
+  <aside class="clinical-note"><div class="shell"><p><strong>Nota informativa.</strong> Questi contenuti descrivono in modo generale le prestazioni dello studio e non sostituiscono una visita. Indicazioni, benefici, limiti e alternative dipendono dalla situazione clinica individuale.</p></div></aside>
+  <ContactBlock />
+</BaseLayout>

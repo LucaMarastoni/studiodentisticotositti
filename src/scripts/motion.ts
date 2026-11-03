@@ -16,9 +16,11 @@ syncHeroVideo();
 reducedMotion.addEventListener('change', syncHeroVideo);
 const media = gsap.matchMedia();
 media.add('(prefers-reduced-motion: no-preference)', () => {
-  gsap.utils.toArray<HTMLElement>('[data-reveal]:not(.treatment-card):not(.contact-bottom), [data-title]').forEach(element => {
+  gsap.utils.toArray<HTMLElement>('[data-reveal]:not(.treatment-card):not(.contact-bottom), [data-title]')
+    .filter(element => !element.closest('.interior-hero'))
+    .forEach(element => {
     gsap.from(element, { y: element.hasAttribute('data-title') ? 32 : 22, opacity: 0, duration: element.hasAttribute('data-title') ? 1 : 0.82, ease: 'power3.out', scrollTrigger: { trigger: element, start: 'top 94%', once: true }, clearProps: 'transform,opacity' });
-  });
+    });
 
   gsap.utils.toArray<HTMLElement>('[data-image-reveal]').forEach(element => {
     gsap.from(element, { clipPath: 'inset(9% 0 9% 0)', duration: 1.25, ease: 'power3.inOut', scrollTrigger: { trigger: element, start: 'top 93%', once: true }, clearProps: 'clipPath' });

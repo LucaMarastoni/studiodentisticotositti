@@ -39,10 +39,10 @@ SITE_URL=https://preview.example BASE_PATH=/repo/ PUBLIC_DEPLOY_ENV=preview npm 
 
 Ripristinare poi la build locale con `npm run build`. Per un host definitivo configurare il dominio approvato, `BASE_PATH=/` e `PUBLIC_DEPLOY_ENV=production`. I file da servire sono in `dist/`.
 
-Il workflow `.github/workflows/deploy.yml` è **solo manuale**, usa `noindex` e non è stato eseguito. Occorrono un repository remoto, Pages configurato e autorizzazione esplicita prima di lanciarlo. `noindex` non è controllo degli accessi. GitHub Pages è qui destinato all'anteprima; la produzione rimane portabile su altro hosting statico.
+Il workflow `.github/workflows/deploy.yml` pubblica automaticamente l’anteprima su GitHub Pages a ogni push su `main` e può essere avviato anche manualmente. In GitHub, **Settings → Pages → Build and deployment → Source** deve essere impostato su **GitHub Actions**. L’anteprima usa `noindex`; `noindex` non è controllo degli accessi. GitHub Pages è qui destinato all’anteprima, mentre la produzione rimane portabile su altro hosting statico.
 
 Integrazione basata sulla [documentazione Astro per Tailwind](https://docs.astro.build/en/guides/styling/) e sulla [guida GitHub Pages](https://docs.astro.build/en/guides/deploy/github/).
 
 ## File privati
 
-`.gitignore` esclude istruzioni agenti, configurazioni locali, riferimenti privati, artefatti QA e variabili d'ambiente. Non includerli nei commit. Nessun push o deploy è stato effettuato.
+`.gitignore` esclude istruzioni agenti, configurazioni locali, riferimenti privati, artefatti QA e variabili d'ambiente. Non includerli nei commit. Il deploy automatico parte soltanto dopo un push su `main` o un avvio manuale del workflow.

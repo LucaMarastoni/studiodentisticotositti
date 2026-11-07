@@ -1,0 +1,61 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Action from '../../components/Action.astro';
+import ContactBlock from '../../components/ContactBlock.astro';
+import { treatments, treatmentDetails, type Treatment } from '../../data/treatments';
+import { treatmentMedia } from '../../data/media';
+import { pathFor } from '../../utils/paths';
+
+export const getStaticPaths = (() => {
+  const approved = treatments.filter(treatment => treatment.status === 'approved');
+  return approved.map((treatment, index) => ({
+    params: { slug: treatment.slug },
+    props: {
+      treatment,
+      previous: approved.at(index - 1) ?? approved.at(-1),
+      next: approved.at(index + 1) ?? approved[0],
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  treatment: Treatment;
+  previous: Treatment;
+  next: Treatment;
+}
+
+const { treatment, previous, next } = Astro.props;
+const details = treatmentDetails[treatment.slug] ?? [];
+const media = treatmentMedia[treatment.slug as keyof typeof treatmentMedia];
+---
+<BaseLayout title={`${treatment.title} — Trattamenti`} description={`${treatment.summary} ${treatment.description}`}>
+  <section class="treatment-detail-hero shell">
+    <nav class="breadcrumb" aria-label="Percorso di navigazione"><a href={pathFor()}>Home</a><span aria-hidden="true">/</span><a href={pathFor('trattamenti/')}>Trattamenti</a></nav>
+    <p class="eyebrow">{treatment.category}</p>
+    <h1>{treatment.title}</h1>
+    <p class="treatment-detail-lead">{treatment.summary}</p>
+  </section>
+
+  <section class="treatment-detail-main" aria-label={`Approfondimento: ${treatment.title}`}>
+    <div class="shell treatment-detail-layout">
+      <aside class="treatment-detail-aside">
+        {media && <figure class="treatment-detail-image" data-image-reveal><img src={pathFor(media.src)} width={media.width} height={media.height} alt={media.alt} loading="lazy" /><figcaption>{media.caption} · <a href={media.source}>Fonte <span aria-hidden="true">↗</span></a></figcaption></figure>}
+        <p class="eyebrow">In breve</p>
+        <p>{treatment.description}</p>
+        <Action href={pathFor('contatti/')} variant="outline">Contatta lo studio</Action>
+      </aside>
+      <div class="treatment-detail-content">
+        {details.map((section, index) => <section data-reveal><span class="detail-number">{String(index + 1).padStart(2, '0')}</span><h2>{section.title}</h2><p>{section.text}</p>{section.items && <ul>{section.items.map(item => <li>{item}</li>)}</ul>}</section>)}
+      </div>
+    </div>
+  </section>
+
+  <aside class="clinical-note"><div class="shell"><p><strong>Nota informativa.</strong> Le informazioni hanno carattere generale e non sostituiscono la visita odontoiatrica. Indicazioni, benefici, limiti, alternative e tempi dipendono dalla situazione clinica individuale.</p></div></aside>
+
+  <nav class="shell treatment-pagination" aria-label="Altri trattamenti">
+    <a href={pathFor(`trattamenti/${previous.slug}/`)}><span>Trattamento precedente</span><strong>{previous.title}</strong></a>
+    <a href={pathFor(`trattamenti/${next.slug}/`)}><span>Trattamento successivo</span><strong>{next.title}</strong></a>
+  </nav>
+  <ContactBlock />
+</BaseLayout>

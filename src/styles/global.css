@@ -106,9 +106,13 @@ html[data-loader-ready]:not([data-page-ready]) .page-loader { opacity: 1; visibi
 .section-heading .eyebrow { margin-bottom: 25px; }
 .section-heading-side { max-width: 315px; padding-bottom: 5px; }
 .section-heading-side > p { font-size: 13px; color: var(--muted); line-height: 1.8; }
-.section-heading-side .button { margin-top: 15px; }
+.section-heading-side .button { margin-top: 18px; }
+.section-heading-side .treatments-index-link { border-color: var(--forest); background: var(--ivory); font-weight: var(--font-body-semibold); }
+.section-heading-side .treatments-index-link:hover { background: var(--forest); color: var(--ivory); }
 .treatment-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.treatment-card { background: var(--ivory); border-radius: 6px; overflow: hidden; }
+.treatment-card { display: flex; flex-direction: column; background: var(--ivory); border-radius: 6px; overflow: hidden; transition: transform .35s ease, box-shadow .35s ease; }
+.treatment-card[href]:hover { transform: translateY(-5px); box-shadow: 0 18px 45px #294b3d18; }
+.treatment-card[href]:focus-visible { outline-offset: 5px; }
 .treatment-art { height: 225px; position: relative; overflow: hidden; background: #d3ddcf; }
 .treatment-art img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.65) contrast(.96); transition: transform .7s ease; }
 .treatment-card:hover .treatment-art img { transform: scale(1.035); }
@@ -125,12 +129,15 @@ html[data-loader-ready]:not([data-page-ready]) .page-loader { opacity: 1; visibi
 .treatment-art--wave span:nth-child(1) { width: 330px; height: 330px; border: 42px solid #849d7d; border-radius: 45%; top: 65px; right: 5px; rotate: -20deg; }
 .treatment-art--wave span:nth-child(2) { width: 100px; height: 100px; border-radius: 50%; background: #f1eedc; top: 35px; right: 48px; }
 .treatment-art--wave span:nth-child(3) { width: 300px; height: 300px; border: 1px solid #f7f6f0a0; border-radius: 50%; top: 60px; right: 5px; }
-.treatment-body { padding: 22px 25px 29px; }
+.treatment-body { display: flex; flex: 1; flex-direction: column; padding: 22px 25px 29px; }
 .card-topline { display: flex; align-items: center; justify-content: space-between; }
 .card-number { font-size: 10px; color: var(--muted); }
 .status-label { font-size: 8px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
 .treatment-body h3 { font-size: 31px; margin-top: 20px; line-height: 1.12; }
 .treatment-body p { margin-top: 10px; max-width: 235px; font-size: 11px; line-height: 1.8; color: var(--muted); }
+.treatment-card__cta { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: auto; padding-top: 24px; color: var(--forest); font-size: 11px; font-weight: var(--font-body-semibold); }
+.treatment-card__cta svg { flex: 0 0 auto; transition: transform .25s; }
+.treatment-card:hover .treatment-card__cta svg { transform: translateX(5px); }
 .testimonials-section { background: var(--forest); color: var(--ivory); overflow: hidden; }
 .testimonials-section :focus-visible { outline-color: var(--ivory); }
 .testimonials-section .eyebrow { color: #c2d0bd; }
@@ -247,8 +254,38 @@ html[data-loader-ready]:not([data-page-ready]) .page-loader { opacity: 1; visibi
 .treatment-list h3 { font-size: 34px; }
 .treatment-list p { max-width: 670px; margin-top: 9px; color: var(--muted); font-size: 13px; line-height: 1.75; }
 .treatment-list .treatment-summary { color: var(--forest); font-weight: var(--font-body-medium); }
+.treatment-list .button { margin-top: 18px; padding-inline: 0; }
 .clinical-note { padding-block: 28px; background: var(--forest); color: var(--ivory); }
 .clinical-note p { max-width: 920px; font-size: 12px; line-height: 1.75; }
+.treatment-detail-hero { padding-block: 45px 90px; }
+.treatment-detail-hero .breadcrumb { margin-bottom: 55px; }
+.treatment-detail-hero .eyebrow { margin-bottom: 22px; }
+.treatment-detail-hero h1 { max-width: 1050px; }
+.treatment-detail-lead { max-width: 650px; margin-top: 32px; color: var(--muted); font-size: 18px; line-height: 1.75; }
+.treatment-detail-image { max-width: 380px; margin-bottom: 38px; }
+.treatment-detail-image img { width: 100%; height: 235px; object-fit: cover; object-position: center; border-radius: 6px 56px 6px 6px; filter: saturate(.72) contrast(.96); }
+.treatment-detail-image figcaption { margin-top: 10px; color: var(--muted); font-size: 9px; line-height: 1.55; }
+.treatment-detail-image figcaption a { color: var(--forest); text-decoration: underline; text-underline-offset: 4px; }
+.treatment-detail-main { padding-block: 90px 110px; border-top: 1px solid var(--line); background: var(--mist); }
+.treatment-detail-layout { display: grid; grid-template-columns: .65fr 1.35fr; gap: 10%; align-items: start; }
+.treatment-detail-aside { position: sticky; top: 125px; }
+.treatment-detail-aside > p:not(.eyebrow) { max-width: 360px; margin-top: 22px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.treatment-detail-aside .button { margin-top: 28px; }
+.treatment-detail-content { border-top: 1px solid var(--line); }
+.treatment-detail-content section { padding-block: 42px; border-bottom: 1px solid var(--line); }
+.detail-number { display: block; color: var(--muted); font-size: 10px; letter-spacing: .14em; }
+.treatment-detail-content h2 { max-width: 720px; margin-top: 18px; font-size: clamp(42px, 4.6vw, 65px); }
+.treatment-detail-content p { max-width: 720px; margin-top: 22px; color: var(--muted); font-size: 15px; line-height: 1.85; }
+.treatment-detail-content ul { max-width: 720px; margin: 25px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.treatment-detail-content li { position: relative; padding: 14px 0 14px 25px; border-bottom: 1px solid var(--line); color: var(--forest); font-size: 14px; line-height: 1.6; }
+.treatment-detail-content li::before { content: '\2192'; position: absolute; left: 0; color: var(--sage); }
+.treatment-pagination { display: grid; grid-template-columns: 1fr 1fr; padding-block: 65px; }
+.treatment-pagination a { display: flex; min-height: 120px; flex-direction: column; justify-content: center; padding: 25px 40px; border: 1px solid var(--line); transition: background .25s, color .25s; }
+.treatment-pagination a + a { border-left: 0; text-align: right; }
+.treatment-pagination a:hover { background: var(--forest); color: var(--ivory); }
+.treatment-pagination span { font-size: 10px; text-transform: uppercase; letter-spacing: .13em; color: var(--muted); }
+.treatment-pagination a:hover span { color: #d6ded2; }
+.treatment-pagination strong { margin-top: 10px; font-family: var(--font-display); font-size: 28px; font-weight: var(--font-display-weight); line-height: 1.15; }
 .contact-details-grid { display: grid; grid-template-columns: 1.4fr .6fr; gap: 10%; padding: 54px; background: var(--forest); color: var(--ivory); }
 .contact-details-grid .eyebrow { color: #c2d0bd; }
 .contact-primary > a { display: flex; align-items: center; justify-content: space-between; max-width: 650px; margin-top: 32px; padding-bottom: 20px; border-bottom: 1px solid #f7f6f050; font-family: var(--font-display); font-size: clamp(48px, 6vw, 80px); line-height: 1; }
@@ -382,6 +419,21 @@ html[data-loader-ready]:not([data-page-ready]) .page-loader { opacity: 1; visibi
   .treatment-category { padding-block: 50px; }
   .treatment-category .shell { grid-template-columns: 1fr; gap: 35px; }
   .treatment-list h3 { font-size: 30px; }
+  .treatment-detail-hero { padding-block: 25px 60px; }
+  .treatment-detail-hero .breadcrumb { margin-bottom: 35px; }
+  .treatment-detail-hero h1 { font-size: 58px; overflow-wrap: anywhere; }
+  .treatment-detail-lead { margin-top: 24px; font-size: 16px; }
+  .treatment-detail-image { width: min(100%, 420px); max-width: none; margin-bottom: 35px; }
+  .treatment-detail-image img { height: 260px; border-top-right-radius: 60px; }
+  .treatment-detail-image figcaption { font-size: 9px; }
+  .treatment-detail-main { padding-block: 60px 75px; }
+  .treatment-detail-layout { grid-template-columns: 1fr; gap: 55px; }
+  .treatment-detail-aside { position: static; }
+  .treatment-detail-content h2 { font-size: 42px; }
+  .treatment-detail-content p { font-size: 14px; }
+  .treatment-pagination { grid-template-columns: 1fr; padding-block: 45px; }
+  .treatment-pagination a { min-height: 105px; padding: 22px; }
+  .treatment-pagination a + a { border-top: 0; border-left: 1px solid var(--line); text-align: left; }
   .contact-details-grid { padding: 30px 24px; }
   .contact-primary > a { font-size: 43px; }
   .contact-address address { font-size: 27px; }

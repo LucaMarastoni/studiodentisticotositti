@@ -7,7 +7,7 @@ import { pathFor } from '../utils/paths';
 <BaseLayout title="Contatti e orari — Villaverla" description="Contatta lo Studio Dentistico Tositti: 0445 350135. Via Stadio, 2, 36030 Villaverla (VI). Orari e appuntamenti telefonici.">
   <section class="interior-hero shell"><a class="breadcrumb" href={pathFor()}>Home <span aria-hidden="true">/</span></a><p class="eyebrow" data-reveal>Contatti</p><h1 data-title>Un appuntamento,<br /><em>con semplicità.</em></h1><p class="interior-description" data-reveal>Lo studio riceve esclusivamente su appuntamento, da concordare telefonicamente.</p></section>
   <section class="contact-details section-space--bottom"><div class="shell contact-details-grid">
-    <div class="contact-primary" data-reveal><p class="eyebrow">Telefono</p><a href={clinic.phoneHref}>{clinic.phoneDisplay}<span aria-hidden="true">↗</span></a><p>Per informazioni, prenotazioni, variazioni o disdette.</p></div>
+    <div class="contact-primary" data-reveal><p class="eyebrow">Telefono</p><a href={clinic.phoneHref}>{clinic.phoneDisplay}</a><p>Per informazioni, prenotazioni, variazioni o disdette.</p></div>
     <div class="contact-address" data-reveal><p class="eyebrow">Dove siamo</p><address>{clinic.street}<br />{clinic.locality}</address><Action href={clinic.mapsUrl} variant="outline">Apri le indicazioni</Action></div>
   </div></section>
   <section class="hours-section section-space"><div class="shell editorial-split editorial-split--compact"><div><p class="eyebrow">Orari</p><h2>Quando<br /><em>trovarci.</em></h2><p class="hours-note">Martedì e venerdì lo studio osserva orario continuato.</p></div><dl class="hours-list">{openingHours.map(item => <div><dt>{item.day}</dt><dd>{item.hours}</dd></div>)}</dl></div></section>

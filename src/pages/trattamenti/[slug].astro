@@ -40,7 +40,7 @@ const media = treatmentMedia[treatment.slug as keyof typeof treatmentMedia];
   <section class="treatment-detail-main" aria-label={`Approfondimento: ${treatment.title}`}>
     <div class="shell treatment-detail-layout">
       <aside class="treatment-detail-aside">
-        {media && <figure class="treatment-detail-image" data-image-reveal><img src={pathFor(media.src)} width={media.width} height={media.height} alt={media.alt} loading="lazy" /><figcaption>{media.caption} · <a href={media.source}>Fonte <span aria-hidden="true">↗</span></a></figcaption></figure>}
+        {media && <figure class="treatment-detail-image" data-image-reveal><img src={pathFor(media.src)} width={media.width} height={media.height} alt={media.alt} loading="lazy" /><figcaption>{media.caption} · <a href={media.source}>Fonte</a></figcaption></figure>}
         <p class="eyebrow">In breve</p>
         <p>{treatment.description}</p>
         <Action href={pathFor('contatti/')} variant="outline">Contatta lo studio</Action>

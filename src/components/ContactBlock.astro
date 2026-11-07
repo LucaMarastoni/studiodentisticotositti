@@ -9,6 +9,6 @@ const { standalone = false } = Astro.props;
   <div class="shell">
     <p class="eyebrow" data-reveal>{contact.eyebrow}</p>
     {standalone ? <h1 id="contact-title" data-title>{contact.title}<br /><em>{contact.emphasis}</em></h1> : <h2 id="contact-title" data-title>{contact.title}<br /><em>{contact.emphasis}</em></h2>}
-    <div class="contact-bottom" data-reveal><div><p>{contact.description}</p><a class="phone-number" href={clinic.phoneHref} aria-label={`${contact.callLabel}: ${clinic.phoneDisplay}`}>{clinic.phoneDisplay}<span aria-hidden="true">↗</span></a></div><div class="contact-location"><address>{clinic.street}<br />{clinic.locality}</address><Action href={clinic.mapsUrl} variant="text">{contact.directions}</Action></div></div>
+    <div class="contact-bottom" data-reveal><div><p>{contact.description}</p><a class="phone-number" href={clinic.phoneHref} aria-label={`${contact.callLabel}: ${clinic.phoneDisplay}`}>{clinic.phoneDisplay}</a></div><div class="contact-location"><address>{clinic.street}<br />{clinic.locality}</address><Action href={clinic.mapsUrl} variant="text">{contact.directions}</Action></div></div>
   </div>
 </section>
